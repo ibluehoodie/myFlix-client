@@ -12,6 +12,11 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  const handleRegister = (e) => {
+    e.preventDefault()
+    props.onRegister(true)
+  };
+
   return (
     // "e" in input prevents default page refresh on "submit".
     <form>
@@ -26,7 +31,7 @@ export function LoginView(props) {
       <button type="submit" onClick={handleSubmit}>Submit</button>
       <br>
       </br>
-      <button type="submit">Register</button>
+      <button type="submit" onClick={handleRegister}>Register</button>
     </form>
   );
 }
