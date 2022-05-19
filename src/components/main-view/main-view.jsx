@@ -49,11 +49,11 @@ export class MainView extends React.Component {
   }
 
   // placeholder for RegistrationView login function
-  onRegistration(user) {
-    this.setState({
-      user
-    });
-  }
+  // onRegister(user) {
+  //   this.setState({
+  //     user
+  //   });
+  // }
 
   // controls what the component displays - via render().
   render() {
@@ -61,6 +61,11 @@ export class MainView extends React.Component {
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+    // forcing a registration form for testing.
+    if (!registered) {
+      return <RegistrationView onRegister={(bool) => this.onRegister(bool)} />;
+    }
 
     // Before the movies have been loaded. 
     if (movies.length === 0) return <div className="main-view" />;
