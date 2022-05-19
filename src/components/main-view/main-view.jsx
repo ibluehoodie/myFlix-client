@@ -20,7 +20,17 @@ export class MainView extends React.Component {
     };
   }
 
-  setSelectedMovie(newSelectedMovie) {
+  componentDidMount() {
+    axios.get('https://ibluehoodie-movie-app.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
     this.setState({
       selectedMovie: newSelectedMovie
     });
