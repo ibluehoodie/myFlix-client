@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class MovieView extends React.Component {
 
@@ -19,6 +20,8 @@ export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
+    // placeholder image code
+    // src="http://via.placeholder.com/400x600"
     return (
       <div className="movie-view">
         <div className="movie-poster">
