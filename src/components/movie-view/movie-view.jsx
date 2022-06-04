@@ -5,41 +5,38 @@ import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 
-  // example only: callback --> unmount. 
-  // keypressCallback() component method will be callback function for addEventListener() and removeEventListener().
-  keypressCallback(event) {
-    console.log(event.key);
-  }
-  // adds event listener when MovieView mounts to DOM.
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
-  // removes event listener when MovieView unmounts.
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
-  }
+export class MovieView extends React.Component {
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movieData, onBackClick } = this.props;
 
-    // placeholder image code
-    // src="http://via.placeholder.com/400x600"
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
-      </div>
-    )
+      <Card>
+        <Card.Img variant="top" src={movieData.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movieData.Title}</Card.Title>
+          <Card.Text>{movieData.Description}</Card.Text>
+          <Link to={`/directors/${movieData.Director.Name}`}>
+            <Button>Director</Button>
+          </Link>
+          <Link to={`/genres/${movieData.Genre.Name}`}>
+            <Button>Genre</Button>
+          </Link>
+          <Button onClick={() => {
+            onBackClick();
+          }}>Back
+          </Button>
+        </Card.Body>
+      </Card>
+    );
   }
 }
+
+MovieView.propTypes = {
+  movieData: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
