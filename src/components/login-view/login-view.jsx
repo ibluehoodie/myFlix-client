@@ -90,3 +90,11 @@ export function LoginView(props) {
     </Row>
   );
 }
+
+LoginView.propTypes = {
+  register: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  }),
+  onLoggedIn: PropTypes.func.isRequired
+};
