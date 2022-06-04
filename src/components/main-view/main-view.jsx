@@ -1,13 +1,16 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-import { RegistrationView } from '../registration-view/registration-view';
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-
+import { RegistrationView } from '../registration-view/registration-view';
+import { GenreView } from '../genre-view/genre-view';
+import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 // make new component usable by others.
 // "export" keyword exposes the  MainView component.
