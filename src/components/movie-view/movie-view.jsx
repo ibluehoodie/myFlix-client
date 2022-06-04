@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button, Card, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 
-export class MovieView extends React.Component {
+import { Link } from 'react-router-dom';
 
   // example only: callback --> unmount. 
   // keypressCallback() component method will be callback function for addEventListener() and removeEventListener().
