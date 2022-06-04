@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movieData, onMovieClick } = this.props;
+    const { movieData } = this.props;
 
     return (
       <Card className="justify-content-md-center">
@@ -15,7 +15,9 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movieData.Title}</Card.Title>
           <Card.Text>{movieData.Description}</Card.Text>
-          <Button onClick={() => onMovieClick(movieData)} iant="link">Open</Button>
+          <Link to={`/movies/${movieData._id}`}>
+            <Button variants="link">Open</Button>
+          </Link>
         </Card.Body>
       </Card>
     );
@@ -26,10 +28,10 @@ export class MovieCard extends React.Component {
 // -movie prop obj may contain a Title, and must be string if so.
 // -props obj must contain onMovieClick as a function.
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
+  movieData: PropTypes.shape({
     Title: PropTypes.string,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  // onMovieClick: PropTypes.func.isRequired
 };
