@@ -55,16 +55,24 @@ export class MainView extends React.Component {
   }
 
   // When a user successfully logs in, this function updates the 'user' property in the state to that *particular user 
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    // 'authData includes 'user' and 'token' for 'data' from login-view handleSubmit() -> props.onLoggedIn(data);
+    console.log(authData);
     this.setState({
-      user,
+      user: authData.user.Username
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
 
-  // placeholder for RegistrationView login function
-  onRegister(user) {
+  // Clear authData (user and token) from localStorage. Needs onClick handler button in MainView;
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.setState({
-      registered,
+      user: null,
     });
   }
 
