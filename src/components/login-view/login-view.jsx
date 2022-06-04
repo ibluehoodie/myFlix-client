@@ -13,13 +13,45 @@ export function LoginView(props) {
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
 
+  // Validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username required');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be at least 2 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password required');
+      isReq - false;
+    } else if (password.length < 6) {
+      setPassword('Password must be at least 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication,
-    then call props.onLoggedIn(username). Allows user to login without correct credentials - but will need to relogin if page refreshes. */
-    props.onLoggedIn(username);
+    const isReq = validate();
+    if (isReq) {
+      /* Send a request to the server for authentication,
+      then call props.onLoggedIn(username). Allows user to login without correct credentials - but will need to relogin if page refreshes. */
+      axios.post('https://ibluehoodie-movie-app.herokuapp.com/login', {
+        Username: username,
+        Password: password
+      })
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('not a valid user')
+        });
+    }
   };
 
   const handleRegister = (e) => {
