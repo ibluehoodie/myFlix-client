@@ -2,4 +2,9 @@
   color: #4682b4;
 }
 
+body, .MovieCard {
+  font-family: Yanone Kaffeesatz, sans-serif;
+  font-weight: 400;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */
