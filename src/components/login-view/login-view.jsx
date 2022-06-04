@@ -54,10 +54,10 @@ export function LoginView(props) {
     }
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault()
-    props.onRegister(true)
-  };
+  // const handleRegister = (e) => {
+  //   e.preventDefault()
+  //   props.onRegister(true)
+  // };
 
   return (
     // "e" in input prevents default page refresh on "submit".
