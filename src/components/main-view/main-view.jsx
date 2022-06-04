@@ -26,18 +26,32 @@ export class MainView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('https://ibluehoodie-movie-app.herokuapp.com/movies')
+  // use axios to make a GET req to /movies endpoint of Node.js API;
+  getMovies(token) {
+    axios.get('https://ibluehoodie-movie-app.herokuapp.com/movies', {
+      // passing bearer authorization in header of HTTP req to make authenticated reqs to API;
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(response => {
+        //Assign the result to the state;
         this.setState({
           movies: response.data
         });
       })
-      .catch(error => {
+      .catch(function (error) {
         console.log(error);
       });
   }
 
+  // 3.6 componentDidMount update for persistent login data;
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   // When a user successfully logs in, this function updates the 'user' property in the state to that *particular user 
