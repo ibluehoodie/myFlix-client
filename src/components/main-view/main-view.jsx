@@ -151,6 +151,19 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
+          {/* Link route to profile-view */}
+          <Route path={`/users/${user}`} render={({ history, match }) => {
+            if (!user) {
+              return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            }
+            if (movies.length === 0) {
+              return <div className="main-view" />
+            }
+            return (
+              <ProfileView history={history} movies={movies} user={user === match.params.username} />
+            );
+          }} />
+
         </Row>
       </Router>
     );
