@@ -1,5 +1,15 @@
 $color: steelblue;
 
 .my-flix {
-    color: $color;
+  color: $color;
+}
+
+body {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 400;
+}
+
+.MovieCard {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 400;
 }
