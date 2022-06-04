@@ -22,8 +22,6 @@ export class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       movies: [],
-      // determine if a movie was clicked for details. 
-      selectedMovie: null,
       user: null
     };
   }
@@ -40,11 +38,6 @@ export class MainView extends React.Component {
       });
   }
 
-  // When a movie is clicked, this function is invoked and updates the state of the 'selectedMovie' *property to that movie.
-  setSelectedMovie(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
   }
 
   // When a user successfully logs in, this function updates the 'user' property in the state to that *particular user 
