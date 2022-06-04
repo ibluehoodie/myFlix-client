@@ -11,6 +11,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { NavbarView } from '../navbar-view/navbar-view';
 
 // make new component usable by others.
 // "export" keyword exposes the  MainView component.
@@ -90,6 +91,7 @@ export class MainView extends React.Component {
 
     return (
       <Router>
+        <NavbarView user={user} />
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
