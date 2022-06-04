@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
