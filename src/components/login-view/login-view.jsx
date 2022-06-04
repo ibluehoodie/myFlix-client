@@ -61,19 +61,32 @@ export function LoginView(props) {
 
   return (
     // "e" in input prevents default page refresh on "submit".
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
-      <br>
-      </br>
-      <button type="submit" onClick={handleRegister}>Register</button>
-    </form>
+    <Row className="login-view justify-content-md-center">
+      <Col md={6}>
+        <Form>
+          <Form.Group className="mb-3" controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+            {/* add code here to display validation error */}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            {/* add code here to display validation error */}
+          </Form.Group>
+
+          <div className="buttons">
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+              Login
+            </Button>
+
+            <Link to={"/register"}>
+              <Button variant="secondary" type="submit">Register</Button>
+            </Link>
+          </div>
+        </Form>
+      </Col>
+    </Row>
   );
 }
