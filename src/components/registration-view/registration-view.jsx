@@ -35,7 +35,7 @@ export function RegistrationView(props) {
     if (!email) {
       setEmailErr('Email required');
       isReq = false;
-    } else if (email.indexOf('@)') === -1) {
+    } else if (email.indexOf('@') == -1) {
       setEmailErr('Must include valid email address');
       isReq = false;
     }
@@ -90,13 +90,13 @@ export function RegistrationView(props) {
 
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email:</Form.Label>
-            <Form.Control type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+            <Form.Control type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
             {/* add code here to display validation error */}
             {emailErr && <p>{emailErr}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBirthday">
-            <Form.Label>Birthday:</Form.Label>
+            <Form.Label>Date of birth:</Form.Label>
             <Form.Control type="date" placeholder="Birthday MM/DD/YYYY" value={birthday} onChange={e => setBirthday(e.target.value)} />
             {/* add code here to display validation error */}
             {birthdayErr && <p>{birthdayErr}</p>}
@@ -115,5 +115,5 @@ RegistrationView.propTypes = {
     password: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }),
-  /* onLoggedIn: PropTypes.func.isRequired */
+  onLoggedIn: PropTypes.func.isRequired
 };
