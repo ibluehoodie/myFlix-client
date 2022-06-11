@@ -7,6 +7,11 @@ import { Link } from 'react-router-dom';
 
 export class DirectorView extends React.Component {
 
+  // handleOnItemClick = (param) => (e) => {
+  //   const { history } = withRouter;
+  //   this.props.history.push(`/movies/${param}`);
+  // };
+
   render() {
     const { director, onBackClick, directorMovies } = this.props;
 
@@ -15,7 +20,7 @@ export class DirectorView extends React.Component {
     // display movies by ${director.Name};
     let directorCards = directorMovies.map(movieData => (
       <Col md={3} key={movieData._id}>
-        <MovieCard onMovieClick={() => this.handleOnItemClick(movieData._id)} />
+        <MovieCard movieonMovieClick={() => this.handleOnItemClick(movieData._id)} />
       </Col>
     ));
 

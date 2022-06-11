@@ -164,7 +164,7 @@ export class MainView extends React.Component {
               const directorMovies = movies.filter(movie => {
                 return movie.Director.Name === directorNameFromPath
               })
-              console.log(directorMovies);
+              // console.log(directorMovies);
 
             }} />
 
