@@ -1,37 +1,7 @@
-/*
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row, Modal } from 'react-bootstrap';
-import { MovieCard } from '../movie-card/movie-card';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-export class ProfileView extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavoriteMovies: [],
-    };
-  }
-
-}
-*/
-
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Form, Container, Button, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
-import "./profile-view.scss";
-import { Card } from "react-bootstrap";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -175,40 +145,7 @@ export class ProfileView extends React.Component {
     const { movies } = this.props;
 
     return (
-      <>
-        {console.log(this.state)}
-        <Row className="justify-content-md-center">
-          {FavoriteMovies.length === 0 ? (
-            <p class="white-text">You have no favorite movies.</p>
-          ) : (
-            movies
-              .filter((movie) => FavoriteMovies.includes(movie._id))
-              .map((movie) => (
-
-                <Col md={3}>
-                  <Card className="favorite-movie card-content" key={movie._id}>
-                    <Card.Img
-                      className="fav-poster"
-                      variant="top"
-                      src={movie.ImagePath}
-                      crossorigin="anonymous"
-                    />
-                    <Card.Body>
-                      <Card.Title className="movie_title">{movie.Title}</Card.Title>
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        value={movie._id}
-                        onClick={(e) => this.removeFavorite(movie)}
-                      >
-                        Remove
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              )))}
-        </Row>
-
+      <Container>
         <Row className="justify-content-md-center">
           <Col md={6}>
             <Form>
@@ -266,7 +203,39 @@ export class ProfileView extends React.Component {
             </Form>
           </Col>
         </Row>
-      </>
+
+        <Row className="justify-content-md-center"> {
+          FavoriteMovies.length === 0 ? (
+            <p class="white-text">You have no favorite movies.</p>
+          ) : (
+            movies
+              .filter((movie) => FavoriteMovies.includes(movie._id))
+              .map((movie) => (
+
+                <Col md={3}>
+                  <Card className="favorite-movie card-content" key={movie._id}>
+                    <Card.Img
+                      className="fav-poster"
+                      variant="top"
+                      src={movie.ImagePath}
+                      crossorigin="anonymous"
+                    />
+                    <Card.Body>
+                      <Card.Title className="movie_title">{movie.Title}</Card.Title>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        value={movie._id}
+                        onClick={(e) => this.removeFavorite(movie)}
+                      >
+                        Remove
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              )))}
+        </Row>
+      </Container>
     );
   }
 }
