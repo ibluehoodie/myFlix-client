@@ -25286,24 +25286,25 @@ class MainView extends _reactDefault.default.Component {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
-                            // when this path is matched, please activate this route
                             exact: true,
-                            path: "/directors/:directorName" // tell the route component what pattern we are looking for
-                            ,
-                            render: (dataPassedToRender)=>{
-                                const match = dataPassedToRender.match;
-                                const location = dataPassedToRender.location;
-                                // console.log(match)
-                                const directorNameFromPath = match.params.directorName;
-                                // what data do we need to load the DirectorView
-                                /* 
-              1. director details object
-              2. a list of director's movies
-              */ // get director details
-                                const directorMovies = movies.filter((movie)=>{
-                                    return movie.Director.Name === directorNameFromPath;
-                                });
-                            // console.log(directorMovies);
+                            path: "/directors/:name",
+                            render: ({ match , history  })=>{
+                                if (!user1) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_loginView.LoginView, {
+                                        onLoggedIn: (user)=>this.onLoggedIn(user)
+                                    }, void 0, false, void 0, void 0)
+                                }, void 0, false, void 0, void 0);
+                                if (movies.length === 0) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
+                                    className: "main-view"
+                                }, void 0, false, void 0, void 0);
+                                return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
+                                    md: 8,
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_directorView.DirectorView, {
+                                        director: movies.find((m)=>m.Director.Name === match.params.name
+                                        ).Director,
+                                        onBackClick: ()=>history.goBack()
+                                    }, void 0, false, void 0, void 0)
+                                }, void 0, false, void 0, void 0);
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
@@ -25327,7 +25328,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 194,
+                            lineNumber: 184,
                             columnNumber: 11
                         }, this)
                     ]
@@ -38129,8 +38130,7 @@ MovieCard.propTypes = {
         Title: _propTypesDefault.default.string,
         Description: _propTypesDefault.default.string.isRequired,
         ImagePath: _propTypesDefault.default.string.isRequired
-    }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    }).isRequired
 };
 
   $parcel$ReactRefreshHelpers$67b2.postlude(module);
@@ -38654,95 +38654,73 @@ class DirectorView extends _reactDefault.default.Component {
     //   this.props.history.push(`/movies/${param}`);
     // };
     render() {
-        const { director , onBackClick , directorMovies  } = this.props;
-        console.log(directorMovies) // this is undefined
-        ;
-        // display movies by ${director.Name};
-        let directorCards = directorMovies.map((movieData)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
-                md: 3,
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
-                    movieonMovieClick: ()=>this.handleOnItemClick(movieData._id)
+        const { director , onBackClick  } = this.props;
+        // console.log(directorMovies) // this is undefined
+        // // display movies by ${director.Name};
+        // let directorCards = directorMovies.map(movieData => (
+        //   <Col md={3} key={movieData._id}>
+        //     <MovieCard movieonMovieClick={() => this.handleOnItemClick(movieData._id)} />
+        //   </Col>
+        // ));
+        return(// <Container className="directorView">
+        //   <Row>
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card, {
+            className: "directorCard",
+            text: "dark",
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Header, {
+                    className: "directorTitle",
+                    children: director.Name
                 }, void 0, false, {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 23,
+                    lineNumber: 30,
                     columnNumber: 9
-                }, this)
-            }, movieData._id, false, {
-                fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 22,
-                columnNumber: 7
-            }, this)
-        );
-        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Container, {
-            className: "directorView",
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card, {
-                    className: "directorCard",
-                    text: "dark",
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Body, {
                     children: [
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Header, {
-                            className: "directorTitle",
-                            children: director.Name
-                        }, void 0, false, {
-                            fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 31,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Body, {
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Text, {
                             children: [
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Text, {
-                                    children: [
-                                        " Biography: ",
-                                        director.Bio
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 33,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Text, {
-                                    children: [
-                                        "Born: ",
-                                        director.Birth_Year
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 34,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
-                                    variants: "primary",
-                                    onClick: ()=>{
-                                        onBackClick();
-                                    },
-                                    children: "Back"
-                                }, void 0, false, {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 35,
-                                    columnNumber: 15
-                                }, this)
+                                " Biography: ",
+                                director.Bio
                             ]
                         }, void 0, true, {
                             fileName: "src/components/director-view/director-view.jsx",
                             lineNumber: 32,
-                            columnNumber: 13
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Text, {
+                            children: [
+                                "Born: ",
+                                director.Birth_Year
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/director-view/director-view.jsx",
+                            lineNumber: 33,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
+                            variants: "primary",
+                            onClick: ()=>{
+                                onBackClick();
+                            },
+                            children: "Back"
+                        }, void 0, false, {
+                            fileName: "src/components/director-view/director-view.jsx",
+                            lineNumber: 34,
+                            columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 30,
-                    columnNumber: 11
+                    lineNumber: 31,
+                    columnNumber: 9
                 }, this)
-            }, void 0, false, {
-                fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 29,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
+            ]
+        }, void 0, true, {
             fileName: "src/components/director-view/director-view.jsx",
-            lineNumber: 28,
+            lineNumber: 29,
             columnNumber: 7
-        }, this);
+        }, this));
     }
 }
 DirectorView.propTypes = {

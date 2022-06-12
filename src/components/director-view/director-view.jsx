@@ -13,33 +13,32 @@ export class DirectorView extends React.Component {
   // };
 
   render() {
-    const { director, onBackClick, directorMovies } = this.props;
+    const { director, onBackClick } = this.props;
 
-
-    console.log(directorMovies) // this is undefined
-    // display movies by ${director.Name};
-    let directorCards = directorMovies.map(movieData => (
-      <Col md={3} key={movieData._id}>
-        <MovieCard movieonMovieClick={() => this.handleOnItemClick(movieData._id)} />
-      </Col>
-    ));
+    // console.log(directorMovies) // this is undefined
+    // // display movies by ${director.Name};
+    // let directorCards = directorMovies.map(movieData => (
+    //   <Col md={3} key={movieData._id}>
+    //     <MovieCard movieonMovieClick={() => this.handleOnItemClick(movieData._id)} />
+    //   </Col>
+    // ));
 
     return (
-      <Container className="directorView">
-        <Row>
-          <Card className="directorCard" text="dark">
-            <Card.Header className="directorTitle">{director.Name}</Card.Header>
-            <Card.Body>
-              <Card.Text> Biography: {director.Bio}</Card.Text>
-              <Card.Text>Born: {director.Birth_Year}</Card.Text>
-              <Button variants="primary" onClick={() => { onBackClick() }}>Back</Button>
-            </Card.Body>
-          </Card>
-        </Row>
-        {/* <Row>
-          {directorCards}
-        </Row> */}
-      </Container>
+      // <Container className="directorView">
+      //   <Row>
+      <Card className="directorCard" text="dark">
+        <Card.Header className="directorTitle">{director.Name}</Card.Header>
+        <Card.Body>
+          <Card.Text> Biography: {director.Bio}</Card.Text>
+          <Card.Text>Born: {director.Birth_Year}</Card.Text>
+          <Button variants="primary" onClick={() => { onBackClick() }}>Back</Button>
+        </Card.Body>
+      </Card>
+      //   </Row>
+      //   {/* <Row>
+      //     {directorCards}
+      //   </Row> */}
+      // </Container>
     );
   }
 }
