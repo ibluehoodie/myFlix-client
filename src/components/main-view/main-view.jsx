@@ -1,9 +1,20 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
+// 0#
+import { setUser, setMovies } from '../../actions/actions';
+
+/* 
+  #1 The rest of components import statements but without the MovieCard's 
+  because it will be imported and used in the MoviesList component rather
+  than in here. 
+*/
+import { MoviesList } from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -13,18 +24,34 @@ import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { NavbarView } from '../navbar-view/navbar-view';
 
-// make new component usable by others.
-// "export" keyword exposes the  MainView component.
-// "class" keyword defines component as class React.Component 
-export class MainView extends React.Component {
+import './main-view.scss';
 
+// #2 "export" keyword removed from here;
+class MainView extends React.Component {
   constructor() {
     super();
-    // Initial state is set to null
+
+    // #3 movies state removed from here;
     this.state = {
-      movies: [],
-      user: null
+      user: null,
+      // movies: [],
+      // fullUser: {}
     };
+  }
+
+  // 3.6 componentDidMount update for persistent login data;
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      // 3.8 update;
+      const { setUser } = this.props;
+      setUser(localStorage.getItem('user'));
+      // Replace 3.6 setState ;
+      // this.setState({
+      //   user: localStorage.getItem('user')
+      // });
+      this.getMovies(accessToken);
+    }
   }
 
   // use axios to make a GET req to /movies endpoint of Node.js API;
@@ -34,25 +61,13 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        //Assign the result to the state;
-        this.setState({
-          movies: response.data
-        });
+
+        // #4
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
-
-  // 3.6 componentDidMount update for persistent login data;
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
   }
 
   // When a user successfully logs in, this function updates the 'user' property in the state to that *particular user 
@@ -79,19 +94,10 @@ export class MainView extends React.Component {
 
   // controls what the component displays - via render().
   render() {
-    const { movies, user } = this.state;
 
-    // we need to find a director that matches 
-
-
-
-    // 3.6 Embed in each <Router> except "/register";
-    // if (!user) return <Row>
-    //   <Col>
-    //     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-    //   </Col>
-    // </Row>
-    // if (movies.length === 0) return <div className="main-view" />;
+    // #5 movies is extracted from this.props rather than from the this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
@@ -99,16 +105,12 @@ export class MainView extends React.Component {
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
-            if (!user) return <Col>
+            if (!user && !localStorage.getItem('user')) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-
-            return movies.map(m => (
-              <Col md={3} key={m._id}>
-                <MovieCard movieData={m} />
-              </Col>
-            ));
+            // #6
+            // return <MoviesList movies={movies} />;
           }} />
 
           <Route path="/register" render={() => {
@@ -157,32 +159,11 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
-
-
-          {/* ORIGINAL ROUTE DEFINITION */}
-          {/* <Route
-            exact path="/directors/:name" // tell the route component what pattern we are looking for
-            render={(argsToRender) => { // 2nd prop passed to Route compoenent, what do we want react to do when this path is matched
-              console.log("Route component loading will render with this argument: ", argsToRender)
-              console.log('match = ', match)
-              if (!user) return <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
-              if (movies.length === 0) return <Row className="main-view" />;
-
-              return <Col md={8}>
-                <DirectorView
-
-                // director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()}
-                />
-              </Col>
-            }} /> */}
-
           {/* <Route path={`/users/${user}`} render={({ */}
 
           {/* Link route to profile-view */}
           <Route path={`/users/:username`} render={({
-            history, match }) => {
+            match, history }) => {
             if (!user) {
               return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
             }
@@ -198,4 +179,16 @@ export class MainView extends React.Component {
       </Router>
     );
   }
+  // Close MainView extends react-component;
 }
+
+// #7
+let mapStateToProps = state => {
+  return {
+    user: state.user,
+    movies: state.movies
+  }
+}
+
+// #8
+export default connect(mapStateToProps, { setUser, setMovies })(MainView);
