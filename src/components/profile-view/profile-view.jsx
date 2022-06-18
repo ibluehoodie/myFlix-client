@@ -196,14 +196,14 @@ export class ProfileView extends React.Component {
                 </Form.Group>
                 <div className="buttons">
                   <Button
-                    variant="primary"
+                    variant="outline-primary"
                     type="submit"
                     onClick={this.editUserDetails}
                   >
                     Update Information
                   </Button>
                   <Button
-                    variant="danger"
+                    variant="outline-danger"
                     type="submit"
                     onClick={(e) => this.deleteProfile(e)}
                   >
@@ -240,7 +240,7 @@ export class ProfileView extends React.Component {
                         <Card.Title className="movie_title">{movie.Title}</Card.Title>
                         <Button
                           size="sm"
-                          variant="danger"
+                          variant="outline-danger"
                           value={movie._id}
                           onClick={(e) => this.removeFavorite(movie)}
                         >
