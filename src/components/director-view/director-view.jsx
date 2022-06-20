@@ -4,6 +4,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { Button, Card, Row, Col, Container } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
+import './director-view.scss';
 
 export class DirectorView extends React.Component {
 

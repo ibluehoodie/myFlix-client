@@ -1,22 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col, Container } from 'react-bootstrap';
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
-  myProp;
-  myOtherProp;
-
-  // this constructor is just for demo purposes
-  constructor() {
-    super()
-    // this just means "this class" or "this object", refering to this instance of MovieView;
-    this.myProp = 'someValue';
-    this.myOtherProp = 'someOtherValue';
-  }
-
 
   // add favorite - test;
   addFavorite(movieData) {
@@ -48,20 +38,22 @@ export class MovieView extends React.Component {
           <Card.Title>{movieData.Title}</Card.Title>
           <Card.Text>{movieData.Description}</Card.Text>
           <Link to={`/directors/${movieData.Director.Name}`}>
-            <Button>Director</Button>
+            <Button variant="outline-primary">Director</Button>
           </Link>
           <Link to={`/genres/${movieData.Genre.Name}`}>
-            <Button>Genre</Button>
+            <Button variant="outline-primary">Genre</Button>
           </Link>
           {/* this is where the addFavorite button should prompt an alert */}
-          <Button onClick={() => {
-            this.addFavorite(movieData);
-          }}>
+          <Button variant="outline-primary" className="btn-primary"
+            onClick={() => {
+              this.addFavorite(movieData);
+            }}>
             Add to Favorites
           </Button>
-          <Button onClick={() => {
-            onBackClick();
-          }}>
+          <Button variant="outline-primary"
+            onClick={() => {
+              onBackClick();
+            }}>
             Back
           </Button>
         </Card.Body>

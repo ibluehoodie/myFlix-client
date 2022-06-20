@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 // import Image from 'react-bootstrap/Image';
 
 import { Link } from 'react-router-dom';
+import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
@@ -16,7 +17,7 @@ export class MovieCard extends React.Component {
           <Card.Title>{movieData.Title}</Card.Title>
           <Card.Text>{movieData.Description}</Card.Text>
           <Link to={`/movies/${movieData._id}`}>
-            <Button variants="link">Open</Button>
+            <Button variant="outline-primary" className="btn-primary" variants="link ">Open</Button>
           </Link>
         </Card.Body>
       </Card>
