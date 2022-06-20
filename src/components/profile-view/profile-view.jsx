@@ -4,6 +4,7 @@ import { Form, Container, Button, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 
 import "./profile-view.scss";
+import { connect } from "react-redux";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -267,3 +268,11 @@ ProfileView.propTypes = {
     })
   ).isRequired,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps, { setUser })(ProfileView);
