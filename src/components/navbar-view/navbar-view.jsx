@@ -32,7 +32,7 @@ export function NavbarView({ user }) {
           <Nav className="ml-auto">
             {/* Hide signup if the token exists  */}
             {isAuth() && (
-              <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+              <Nav.Link href={`/users/${user}`}>{user} Profile</Nav.Link>
             )}
             {isAuth() && (
               <Button variant="link" onClick={() => { onLoggedOut() }}>Logout</Button>
