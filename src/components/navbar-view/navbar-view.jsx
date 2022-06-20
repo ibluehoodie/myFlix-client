@@ -49,3 +49,12 @@ export function NavbarView({ user }) {
     </Navbar>
   );
 } // close export function Menubar
+
+let mapStateToProps = state => {
+  return {
+    movies: state.movies,
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps, { setUser })(NavbarView);
