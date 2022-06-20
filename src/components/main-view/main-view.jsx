@@ -54,6 +54,14 @@ class MainView extends React.Component {
     }
   }
 
+  // Update state of selectedMovie property on click;
+  // TROUBLESHOOT - update value as movieData?;
+  setSelectedMovie(movie) {
+    this.setState({
+      selectedMovie: movie
+    });
+  }
+
   // use axios to make a GET req to /movies endpoint of Node.js API;
   getMovies(token) {
     axios.get('https://ibluehoodie-movie-app.herokuapp.com/movies', {
@@ -97,7 +105,7 @@ class MainView extends React.Component {
 
     // #5 movies is extracted from this.props rather than from the this.state;
     let { movies } = this.props;
-    let { user } = this.state;
+    let { user } = this.props;
 
     return (
       <Router>
