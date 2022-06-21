@@ -269,10 +269,10 @@ ProfileView.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  };
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user
+//   };
+// }
 
-export default connect(mapStateToProps, { setUser })(ProfileView);
+// export default connect(mapStateToProps, { setUser })(ProfileView);
