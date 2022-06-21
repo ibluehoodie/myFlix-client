@@ -1,5 +1,11 @@
-$color: steelblue;
+$backgroundColor: #091421;
+$textColor: #d3dbe0;
+$elementsColor: #1A1E23;
 
-.my-flix {
-    color: $color;
+* {
+  box-sizing: border-box;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 400;
+  background-color: $backgroundColor;
+  color: $textColor;
 }
