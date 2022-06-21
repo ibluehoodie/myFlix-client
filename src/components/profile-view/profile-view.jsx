@@ -275,4 +275,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { setUser })(ProfileView);
+// export default connect(mapStateToProps, { setUser })(ProfileView);
